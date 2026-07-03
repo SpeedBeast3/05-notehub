@@ -28,7 +28,7 @@ export const fetchNotes = async (
     `${BASE_URL}/notes`,
     {
       headers: {
-        Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
+        Authorization: VITE_NOTEHUB_TOKEN,
       },
       params,
     },
@@ -43,7 +43,7 @@ export const createNote = async (payload: CreateNotePayload): Promise<Note> => {
     payload,
     {
       headers: {
-        Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
+        Authorization: VITE_NOTEHUB_TOKEN,
       },
     },
   );
@@ -56,7 +56,7 @@ export const deleteNote = async (id: string): Promise<Note> => {
     `${BASE_URL}/notes/${id}`,
     {
       headers: {
-        Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
+        Authorization: VITE_NOTEHUB_TOKEN,
       },
     },
   );
