@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useDebouncedCallback } from "use-debounce";
 
-import { fetchNotes, deleteNote } from "../../services/noteService";
+import { fetchNotes } from "../../services/noteService";
 import { NoteList } from "../NoteList/NoteList";
 import { SearchBox } from "../SearchBox/SearchBox";
 import { Pagination } from "../Pagination/Pagination";
@@ -14,8 +14,6 @@ import css from "./App.module.css";
 const NOTES_PER_PAGE = 5;
 
 export default function App() {
-  const queryClient = useQueryClient();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -39,20 +37,6 @@ export default function App() {
   const notes = data?.notes || [];
 
   const totalPages = data?.totalPages || 0;
-
-  const deleteMutation = useMutation({
-    mutationFn: deleteNote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["notes"],
-        exact: false,
-      });
-
-      if (notes.length === 1 && currentPage > 1) {
-        setCurrentPage((prev) => prev - 1);
-      }
-    },
-  });
 
   return (
     <div className={css.app}>
@@ -81,10 +65,7 @@ export default function App() {
             {error instanceof Error ? error.message : "Something went wrong"}
           </div>
         ) : notes.length > 0 ? (
-          <NoteList
-            notes={notes}
-            onDeleteNote={(id) => deleteMutation.mutate(id)}
-          />
+          <NoteList notes={notes} />
         ) : (
           <div className={css.empty}>No notes found</div>
         )}
