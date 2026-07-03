@@ -12,16 +12,13 @@ export interface FetchNotesProps {
 
 export interface FetchNotesResponse {
   notes: Note[];
-  page: number;
-  perPage: number;
-  totalItems: number;
   totalPages: number;
 }
 
 export interface CreateNotePayload {
   title: string;
-  content: string;
-  tags?: string;
+  content: string | null;
+  tag: string;
 }
 
 export const fetchNotes = async (

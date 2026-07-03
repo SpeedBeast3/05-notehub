@@ -18,8 +18,8 @@ export const NoteList = ({ notes, onDeleteNote }: NoteListProps) => {
           <p className={css.content}>{note.content}</p>
 
           <div className={css.footer}>
-            {note.tags &&
-              note.tags.map((tag) => (
+            {note.tag &&
+              note.tag.map((tag) => (
                 <span key={tag.id} className={css.tag}>
                   {tag.name}
                 </span>
