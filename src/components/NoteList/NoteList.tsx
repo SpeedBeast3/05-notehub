@@ -27,7 +27,7 @@ export const NoteList = ({ notes }: NoteListProps) => {
           <p className={css.content}>{note.content}</p>
 
           <div className={css.footer}>
-            {note.tag && <span className={css.tag}>{note.tag}</span>}
+            <span className={css.tag}>{note.tag}</span>
 
             <button
               className={css.button}
