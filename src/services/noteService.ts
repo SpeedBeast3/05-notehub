@@ -3,6 +3,7 @@ import type { Note } from "../types/note";
 
 const VITE_NOTEHUB_TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
 const BASE_URL = "https://notehub-public.goit.study/api";
+console.log("TOKEN:", VITE_NOTEHUB_TOKEN);
 
 export interface FetchNotesProps {
   page?: number;
@@ -28,7 +29,7 @@ export const fetchNotes = async (
     `${BASE_URL}/notes`,
     {
       headers: {
-        Authorization: VITE_NOTEHUB_TOKEN,
+        Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
       },
       params,
     },
@@ -43,7 +44,7 @@ export const createNote = async (payload: CreateNotePayload): Promise<Note> => {
     payload,
     {
       headers: {
-        Authorization: VITE_NOTEHUB_TOKEN,
+        Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
       },
     },
   );
@@ -56,7 +57,7 @@ export const deleteNote = async (id: string): Promise<Note> => {
     `${BASE_URL}/notes/${id}`,
     {
       headers: {
-        Authorization: VITE_NOTEHUB_TOKEN,
+        Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
       },
     },
   );
